@@ -1,0 +1,8 @@
+services:
+  local-office-app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app/storage:/app/app/storage
+    restart: unless-stopped

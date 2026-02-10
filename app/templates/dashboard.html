@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <title>لوحة النظام المحلي</title>
+  <style>
+    body{font-family:Tahoma,Arial;background:#f5f7fb;padding:24px}
+    .wrap{max-width:980px;margin:auto}
+    .card{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 14px #0001;margin-bottom:16px}
+    input,button{padding:8px;margin:4px}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid #ddd;text-align:right}
+    a{color:#0757b3;text-decoration:none}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h2>مرحبًا {{ user }}</h2>
+    <a href="/logout">تسجيل الخروج</a>
+  </div>
+
+  <div class="card">
+    <h3>توليد مستند جديد (كتاب رسمي)</h3>
+    <form method="post" action="/generate">
+      <input name="customer_name" placeholder="اسم الزبون/الطالب" required />
+      <input name="destination" placeholder="الجهة" required />
+      <input name="reference_no" placeholder="رقم المرجع" required />
+      <button type="submit">توليد DOCX + PDF + XLSX</button>
+    </form>
+  </div>
+
+  <div class="card">
+    <h3>آخر المستندات</h3>
+    <table>
+      <thead>
+        <tr><th>المعرف</th><th>الاسم</th><th>الجهة</th><th>التاريخ</th><th>الملفات</th></tr>
+      </thead>
+      <tbody>
+      {% for d in documents %}
+        <tr>
+          <td>{{ d[0] }}</td>
+          <td>{{ d[2] }}</td>
+          <td>{{ d[3] }}</td>
+          <td>{{ d[4][:10] }}</td>
+          <td>
+            <a href="/storage/generated/doc_{{ d[0] }}.docx">DOCX</a> |
+            <a href="/storage/generated/doc_{{ d[0] }}.pdf">PDF</a> |
+            <a href="/storage/generated/doc_{{ d[0] }}.xlsx">XLSX</a>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+</body>
+</html>
