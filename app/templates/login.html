@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <title>تسجيل الدخول</title>
+  <style>
+    body{font-family:Tahoma,Arial;background:#f5f7fb;padding:40px}
+    .card{max-width:420px;margin:auto;background:#fff;padding:24px;border-radius:12px;box-shadow:0 4px 14px #0001}
+    input,button{width:100%;padding:10px;margin:8px 0}
+    .err{color:#b00020}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>نظام المكتب المحلي</h2>
+    <p>الدخول الافتراضي: <b>owner / admin123</b></p>
+    {% if error %}<p class="err">{{ error }}</p>{% endif %}
+    <form method="post" action="/login">
+      <label>اسم المستخدم</label>
+      <input name="username" required />
+      <label>كلمة المرور</label>
+      <input name="password" type="password" required />
+      <button type="submit">دخول</button>
+    </form>
+  </div>
+</body>
+</html>
